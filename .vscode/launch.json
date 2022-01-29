@@ -1,0 +1,18 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+
+      {
+        "name": "Launch",
+        "type": "go",
+        "request": "launch",
+        "mode": "debug",
+        "preLaunchTask": "serve",
+        "serverReadyAction":{
+          "action": "openExternally",
+          "pattern": "graphql: .* http:\/\/localhost:([0-9]+)\/graphql",
+          "uriFormat": "http://localhost:%s"
+        }
+      }
+    ]
+}
