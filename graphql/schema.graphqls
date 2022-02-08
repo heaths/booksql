@@ -2,6 +2,8 @@
 #
 # https://gqlgen.com/getting-started/
 
+scalar Time
+
 type Book {
   isbn: ID!
   title: String!
@@ -20,6 +22,7 @@ type Author {
   id: ID!
   firstName: String
   lastName: String!
+  birthday: Time
   books: [Book!]
 }
 
@@ -36,8 +39,10 @@ input AuthorInput {
 }
 
 type Query {
-  authors(id: ID): [Author!]
-  books(isbn: ID): [Book!]
+  authors(name: String): [Author!]
+  author(id: ID!): Author
+  books(title: String): [Book!]
+  book(isbn: ID!): Book
 }
 
 type Mutation {

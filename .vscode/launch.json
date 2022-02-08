@@ -10,7 +10,7 @@
         "preLaunchTask": "serve",
         "serverReadyAction":{
           "action": "openExternally",
-          "pattern": "graphql: .* http:\/\/localhost:([0-9]+)\/graphql",
+          "pattern": "http:\/\/localhost:([0-9]+)\/graphql",
           "uriFormat": "http://localhost:%s"
         }
       }

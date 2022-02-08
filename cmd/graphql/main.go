@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"log"
 	"net/http"
 	"os"
@@ -11,7 +12,11 @@ import (
 	"github.com/heaths/booksql/graphql/generated"
 )
 
-const defaultPort = "8080"
+const (
+	defaultPort   = "8080"
+	graphUrl      = "/graphql"
+	playgroundUrl = "/graphql/play"
+)
 
 func main() {
 	port := os.Getenv("FUNCTIONS_CUSTOMHANDLER_PORT")
@@ -19,11 +24,16 @@ func main() {
 		port = defaultPort
 	}
 
-	srv := handler.NewDefaultServer(generated.NewExecutableSchema(generated.Config{Resolvers: &graphql.Resolver{}}))
+	_, debug := os.LookupEnv("DEBUG")
+	resolver, err := graphql.NewResolver(context.Background(), "TODO", debug)
+	if err != nil {
+		log.Fatalf("failed to initialize resolver: %s", err)
+	}
+	srv := handler.NewDefaultServer(generated.NewExecutableSchema(generated.Config{Resolvers: resolver}))
 
-	http.Handle("/graphql", srv)
-	http.Handle("/graphql/play", playground.Handler("GraphQL playground", "/graphql"))
+	http.Handle(graphUrl, srv)
+	http.Handle(playgroundUrl, playground.Handler("GraphQL playground", graphUrl))
 
-	log.Printf("Connect to http://localhost:%s/graphql/play for GraphQL playground", port)
+	log.Printf("Connect to http://localhost:%s%s for GraphQL playground", port, playgroundUrl)
 	log.Fatal(http.ListenAndServe(":"+port, nil))
 }

@@ -35,11 +35,19 @@ func (r *mutationResolver) DeleteBook(ctx context.Context, isbn string) (*model.
 	panic(fmt.Errorf("not implemented"))
 }
 
-func (r *queryResolver) Authors(ctx context.Context, id *string) ([]*model.Author, error) {
+func (r *queryResolver) Authors(ctx context.Context, name *string) ([]*model.Author, error) {
 	panic(fmt.Errorf("not implemented"))
 }
 
-func (r *queryResolver) Books(ctx context.Context, isbn *string) ([]*model.Book, error) {
+func (r *queryResolver) Author(ctx context.Context, id string) (*model.Author, error) {
+	panic(fmt.Errorf("not implemented"))
+}
+
+func (r *queryResolver) Books(ctx context.Context, title *string) ([]*model.Book, error) {
+	panic(fmt.Errorf("not implemented"))
+}
+
+func (r *queryResolver) Book(ctx context.Context, isbn string) (*model.Book, error) {
 	panic(fmt.Errorf("not implemented"))
 }
 

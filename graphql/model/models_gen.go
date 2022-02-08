@@ -2,11 +2,16 @@
 
 package model
 
+import (
+	"time"
+)
+
 type Author struct {
-	ID        string  `json:"id"`
-	FirstName *string `json:"firstName"`
-	LastName  string  `json:"lastName"`
-	Books     []*Book `json:"books"`
+	ID        string     `json:"id"`
+	FirstName *string    `json:"firstName"`
+	LastName  string     `json:"lastName"`
+	Birthday  *time.Time `json:"birthday"`
+	Books     []*Book    `json:"books"`
 }
 
 type AuthorInput struct {
